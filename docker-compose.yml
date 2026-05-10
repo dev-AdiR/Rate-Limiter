@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rate-limiter
+
+    ports:
+      - "8081:8081"
+
+    working_dir: /rate_limiter
+
+    environment:
+      - Target_Url=http://host.docker.internal:8080
+      - JWT_SECRET=KbzVX1ZlViuzPHUbzm9VyiQGCLvLeDCdnQDbN4kAUam
+
+    restart: unless-stopped

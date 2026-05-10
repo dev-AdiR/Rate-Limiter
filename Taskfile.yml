@@ -1,0 +1,23 @@
+version: '3'
+
+vars:
+  BIN_NAME: app
+  EXT: '{{if eq OS "windows"}}.exe{{end}}'
+  DIR: '{{if eq OS "windows"}}windows{{else}}linux{{end}}'
+
+tasks:
+  build:
+    cmds:
+      - go build -o ./dist/{{.BIN_NAME}}{{.EXT}}
+  dev:
+    cmds:
+      - air
+  start:
+    dir: dist
+    cmds:
+      - ./{{.BIN_NAME}}{{.EXT}}
+    
+  run:
+    cmds: 
+      - task build
+      - task start
